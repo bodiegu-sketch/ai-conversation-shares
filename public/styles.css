@@ -1,63 +1,78 @@
 :root {
   color-scheme: light;
-  --bg: #f7f8fb;
-  --paper: #ffffff;
-  --ink: #17202a;
-  --muted: #657184;
-  --line: #e3e8ef;
-  --brand: #1f5cb2;
-  --brand-soft: #e9f1ff;
+  --bg: #f3f5f4;
+  --surface: #ffffff;
+  --surface-soft: #f8faf9;
+  --ink: #15181b;
+  --muted: #687076;
+  --line: #dfe6e3;
+  --line-strong: #c5d0cc;
+  --brand: #1f5f68;
+  --brand-deep: #123b42;
+  --accent: #9a4d2e;
+  --accent-soft: #fff2e8;
+  --code-bg: #f1ece4;
+  --shadow: 0 20px 60px rgba(28, 43, 45, 0.08);
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    linear-gradient(180deg, #e7eeeb 0, rgba(231, 238, 235, 0) 320px),
+    var(--bg);
   color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  line-height: 1.7;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  line-height: 1.78;
+  text-rendering: optimizeLegibility;
 }
 
 a {
   color: var(--brand);
-  text-decoration: none;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
 }
 
 a:hover {
-  text-decoration: underline;
+  color: var(--brand-deep);
 }
 
 .site-header {
-  background: #143660;
-  color: white;
-  padding: 52px 24px;
+  padding: 48px 22px 26px;
 }
 
 .site-header-inner,
 .container {
-  max-width: 920px;
+  width: min(100%, 980px);
   margin: 0 auto;
 }
 
 .site-title {
   margin: 0;
-  font-size: clamp(34px, 6vw, 56px);
-  line-height: 1.1;
+  color: var(--brand-deep);
+  font-size: clamp(32px, 5vw, 54px);
+  line-height: 1.05;
   letter-spacing: 0;
 }
 
 .site-subtitle {
-  margin: 18px 0 0;
-  color: #d4e4fb;
-  font-size: 18px;
+  max-width: 560px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 17px;
 }
 
 .container {
-  padding: 36px 24px 72px;
+  padding: 18px 22px 72px;
 }
 
 .post-list {
@@ -67,89 +82,180 @@ a:hover {
 
 .post-card,
 .post {
-  background: var(--paper);
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 28px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.post-card {
+  padding: 26px;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.post-card:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-1px);
 }
 
 .post-card h2 {
   margin: 0 0 8px;
-  font-size: 26px;
+  font-size: clamp(22px, 3vw, 28px);
   line-height: 1.25;
 }
 
-.meta {
-  color: var(--muted);
-  font-size: 14px;
+.post-card h2 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.post-card h2 a:hover {
+  color: var(--brand);
 }
 
 .summary {
   margin: 14px 0 0;
-  color: #334155;
+  color: #394145;
+}
+
+.post {
+  padding: clamp(28px, 5vw, 58px);
+  overflow: hidden;
+}
+
+.meta {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 24px;
+  color: var(--muted);
+  font-size: 14px;
 }
 
 .post h1 {
+  max-width: 780px;
   margin: 0 0 10px;
-  font-size: clamp(32px, 5vw, 48px);
-  line-height: 1.16;
+  color: #111416;
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.12;
+  letter-spacing: 0;
 }
 
 .post h2 {
-  margin-top: 42px;
-  padding-top: 18px;
+  margin: 52px 0 18px;
+  padding-top: 22px;
   border-top: 1px solid var(--line);
-  font-size: 26px;
+  color: var(--brand-deep);
+  font-size: clamp(23px, 3vw, 30px);
+  line-height: 1.28;
+}
+
+.post > h2:first-of-type {
+  margin-top: 34px;
 }
 
 .post p,
 .post li {
   font-size: 18px;
+  overflow-wrap: anywhere;
+}
+
+.post p {
+  margin: 18px 0;
+}
+
+.post ul {
+  padding-left: 1.35em;
+}
+
+.post li + li {
+  margin-top: 8px;
+}
+
+.post strong {
+  color: #101214;
+  font-weight: 700;
+}
+
+.table-wrap {
+  width: 100%;
+  max-width: 100%;
+  margin: 24px 0;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 10px 28px rgba(28, 43, 45, 0.04);
 }
 
 .post table {
   width: 100%;
-  border-collapse: collapse;
-  margin: 18px 0;
-  background: white;
+  min-width: 680px;
+  border-spacing: 0;
 }
 
 .post th,
 .post td {
-  border: 1px solid var(--line);
-  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  padding: 13px 14px;
   text-align: left;
   vertical-align: top;
+  font-size: 15px;
+  line-height: 1.62;
 }
 
 .post th {
-  background: var(--brand-soft);
+  background: #edf4f2;
+  color: var(--brand-deep);
+  font-weight: 700;
+}
+
+.post tbody tr:last-child td {
+  border-bottom: 0;
 }
 
 pre {
   overflow-x: auto;
-  background: #0f172a;
-  color: #e5edf8;
-  border-radius: 10px;
+  background: #172126;
+  color: #edf7f8;
+  border-radius: 12px;
   padding: 18px;
   line-height: 1.55;
 }
 
 code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.92em;
+  color: #7a3f1e;
+  background: var(--code-bg);
+  border: 1px solid #e4d8c9;
+  border-radius: 6px;
+  padding: 0.08em 0.32em;
+}
+
+pre code {
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
 }
 
 blockquote {
-  margin: 20px 0;
-  padding: 12px 18px;
-  border-left: 4px solid var(--brand);
-  background: var(--brand-soft);
-  color: #1e293b;
+  margin: 28px 0;
+  padding: 18px 22px;
+  border-left: 5px solid var(--accent);
+  background: var(--accent-soft);
+  color: #33291f;
+  border-radius: 0 12px 12px 0;
+}
+
+figure {
+  margin: 28px 0;
 }
 
 img {
   max-width: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid var(--line);
 }
 
@@ -157,5 +263,38 @@ img {
   color: var(--muted);
   font-size: 14px;
   margin-top: 40px;
+  text-align: center;
 }
 
+@media (max-width: 720px) {
+  .site-header {
+    padding: 34px 16px 18px;
+  }
+
+  .container {
+    padding: 12px 12px 54px;
+  }
+
+  .post,
+  .post-card {
+    border-radius: 14px;
+  }
+
+  .post {
+    padding: 24px 18px;
+  }
+
+  .post p,
+  .post li {
+    font-size: 16px;
+  }
+
+  .post table {
+    min-width: 620px;
+  }
+
+  .post th,
+  .post td {
+    font-size: 14px;
+  }
+}

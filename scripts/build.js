@@ -88,7 +88,7 @@ function renderMarkdown(md) {
     if (!inTable) return;
     const rows = tableRows.filter((row) => !/^\s*\|?\s*:?-{3,}:?\s*\|/.test(row));
     if (rows.length) {
-      html += "<table>\n";
+      html += '<div class="table-wrap"><table>\n';
       rows.forEach((row, index) => {
         const cells = row
           .trim()
@@ -96,11 +96,20 @@ function renderMarkdown(md) {
           .replace(/\|$/, "")
           .split("|")
           .map((cell) => inlineMarkdown(cell.trim()));
-        html += index === 0 ? "<thead><tr>" : "<tbody><tr>";
+        if (index === 0) {
+          html += "<thead><tr>";
+        } else if (index === 1) {
+          html += "<tbody><tr>";
+        } else {
+          html += "<tr>";
+        }
         html += cells.map((cell) => index === 0 ? `<th>${cell}</th>` : `<td>${cell}</td>`).join("");
-        html += index === 0 ? "</tr></thead>\n" : "</tr></tbody>\n";
+        html += index === 0 ? "</tr></thead>\n" : "</tr>\n";
       });
-      html += "</table>\n";
+      if (rows.length > 1) {
+        html += "</tbody>\n";
+      }
+      html += "</table></div>\n";
     }
     tableRows = [];
     inTable = false;
@@ -204,7 +213,7 @@ function layout({ title, body, meta = "", description = "" }) {
   <header class="site-header">
     <div class="site-header-inner">
       <h1 class="site-title">AI Conversation Shares</h1>
-      <p class="site-subtitle">可公开分享的 AI 对话、研究框架和 Prompt 模板。</p>
+      <p class="site-subtitle">投资研究与 AI 对话摘录。</p>
     </div>
   </header>
   <main class="container">
